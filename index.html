@@ -1,0 +1,164 @@
+<html>
+<!DOCTYPE html>
+  <head>
+      <style>
+        body {
+          background-color: #21252B;
+        }
+        .bg{
+          padding: 50px;
+          padding-bottom: 10px;
+          width: 50%;
+          display: center;
+
+        }
+        input[type=text], select {
+            width: 80%;
+            padding: 12px 20px;
+            margin: 8px 0;
+            display: inline-block;
+            border: 1px solid #ccc;
+            border-radius: 7px;
+            box-sizing: border-box;
+            display: table;
+            background-color: #ABB2BF;
+            color: #282C34;
+
+          }
+          input[type=date], select {
+              width: 80%;
+              padding: 12px 20px;
+              margin: 8px 0;
+              display: inline-block;
+              border: 1px solid #ccc;
+              border-radius: 7px;
+              box-sizing: border-box;
+              display: table;
+              background-color: #ABB2BF;
+              color: #282C34;
+
+            }
+        .awnser {
+          width: 80%;
+          padding-bottom: 3px;
+          padding-top: 10px;
+          padding-left: 5px;
+          width: 80%;
+          height: 40px;
+          border: 1px solid #ccc;
+          border-radius: 7px;
+          background-color: #ABB2BF;
+        }
+        #awnser_text_field{
+          color: #282C34;
+          font-size: 20px;
+
+        }
+
+        input[type=submit] {
+            width: 80%;
+            background-color: #4CAF50;
+            color: white;
+            padding: 14px 20px;
+            margin: 8px 0;
+            margin-top: 50px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+    }
+    #sepatator {
+      height: 30px;
+    }
+
+    input[type=submit]:hover {
+      background-color: #45a049;
+    }
+        .all {
+          color: #ABB2BF;
+          font-size: 30px;
+          font-family: "Verdana", Geneva, sans-serif;
+          padding: 50px;
+          border-radius: 25px;
+          background-color: #282C34;
+        }
+      </style>
+
+
+  </head>
+  <body>
+    <div class=bg ><div class=all>
+      <label for="fname">Nickname</label>
+      <input type="text" id="usersNickName" name="bdate" placeholder="Nickname (e.g. @neoney🌈#3612)">
+
+      <label for="fname">Birth date</label>
+      <input type="date" id="date" name="bdate" placeholder="Birthdate (e.g 03.05.2005)">
+
+      <input type="submit" value="Calculate" onclick="calc()">
+        <div id=sepatator>
+
+      </div>
+      <div id=awnser class=awnser>
+        <div id=awnser_text_field>
+
+      </div>
+      </div>
+
+    </div></div>
+
+    <script type="text/javascript">
+      function calc(){
+        var user = document.getElementById("usersNickName").value;
+        var date = new Date(document.getElementById("date").value);
+        var dateLegit = new Date(document.getElementById("date").value);
+        var cdate = new Date();
+        var years = 0;
+
+        years = cdate.getYear() - date.getYear();
+        if(date.getMonth() > cdate.getMonth()){
+          years +=1;
+          }
+
+        if(date.getMonth() == cdate.getMonth()){
+          if(date.getDate() >= cdate.getDate()){
+            //document.getElementById("awnser_text_field").innerHTML = "underage";
+            //return;
+            years+=1;
+          }
+       }
+
+       //document.getElementById("awnser_text_field").innerHTML = "notunderage";
+
+       dateLegit.setFullYear(date.getYear()+years+1900);
+       var daysBetween = calculate(dateLegit, cdate);
+       daysBetween = (365 - daysBetween) + ((12 - years)*365);
+       if(!user.startsWith("@")){
+         user = "@" + user;
+       }
+
+       document.getElementById("awnser_text_field").innerHTML = "Days: " + daysBetween + "Command: !tempban " + user + " " + daysBetween + "d";
+      }
+
+
+
+      function calculate(date1, date2 ) {
+      var one_day=1000*60*60*24;
+      var date1_ms = date1.getTime();
+      var date2_ms = date2.getTime();    // Calculate the difference in milliseconds
+      var difference_ms = date2_ms - date1_ms;        // Convert back to days and return
+      return Math.round(difference_ms/one_day);
+      }
+
+
+    </script>
+
+
+
+
+
+
+
+
+
+  </body>
+
+</html>
